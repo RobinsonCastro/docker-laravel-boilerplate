@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  server:
+    container_name: container_nginx
+    build:
+      context: .
+      dockerfile: dockerfiles/nginx.dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - rede
+  php:
+    container_name: container_php
+    build:
+      context: .
+      dockerfile: dockerfiles/php.dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/var/www/html:delegated
+    networks:
+      - rede
+  mysql:
+    image: mysql:8.0
+    container_name: container_mysql
+    ports:
+      - 33068:3306
+    environment:
+      MYSQL_DATABASE: "xxx"
+      MYSQL_USER: "xxx"
+      MYSQL_PASSWORD: "xxx"
+      MYSQL_ROOT_PASSWORD: "xxx"
+    restart: always
+    volumes:
+      - ./docker/.dbdata:/var/lib/mysql
+    networks:
+      - rede
+
+networks:
+  rede:
+    driver: bridge
