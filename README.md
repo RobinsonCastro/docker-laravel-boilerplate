@@ -1,100 +1,69 @@
 # Docker Configuration Skeleton
 
-Este projeto é um skeleton para configurações de contêineres usando Docker, destinado a simplificar a configuração de ambientes de desenvolvimento e teste para aplicações web. Ele inclui contêineres configurados para Nginx, PHP e MySQL.
+This project is a skeleton for container configurations using Docker, aimed at simplifying the setup of development and testing environments for web applications. It includes containers configured for Nginx, PHP, and MySQL.
 
-Uso para rodar projetos Laravel
+Used for running Laravel projects with reverb installed. 
 
-## Conteúdo do Projeto
+## Project Content
 
-- `example.docker-compose.yml`: Arquivo Docker Compose que define os serviços Nginx, PHP e MySQL.
-- `nginx/example.nginx.conf`: Arquivo de configuração do Nginx para servir uma aplicação PHP.
-- `dockerfiles/example.nginx.dockerfile`: Dockerfile para o contêiner Nginx.
-- `dockerfiles/example.php.dockerfile`: Dockerfile para o contêiner PHP.
-- `src/`: Diretório onde o código fonte da aplicação deve ser colocado.
-- `docker/.dbdata/`: Diretório onde os dados do MySQL serão armazenados.
+- `example.docker-compose.yml`: Docker Compose file that defines the Nginx, PHP, and MySQL services.
+- `nginx/example.nginx.conf`: Nginx configuration file for serving a PHP application.
+- `dockerfiles/example.nginx.dockerfile`: Dockerfile for the Nginx container.
+- `dockerfiles/example.php.dockerfile`: Dockerfile for the PHP container.
+- `src/`: Directory where the application’s source code should be placed.
+- `docker/.dbdata/`: Directory where MySQL data will be stored.
 
-## Como Usar
+## How to Use
 
-### Pré-requisitos
+### Prerequisites
 
-- [Docker](https://www.docker.com/get-started) instalado em seu sistema.
-- [Docker Compose](https://docs.docker.com/compose/install/) instalado.
+- [Docker](https://www.docker.com/get-started) installed on your system.
+- [Docker Compose](https://docs.docker.com/compose/install/) installed.
 
-### Passos para Configuração
+### Setup Steps
 
-1. **Clone o repositório:**
+1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/seuusuario/docker-config-skeleton.git
    cd docker-config-skeleton
    ```
 
-2. **Configure o arquivo `.env` (opcional):**
+2. **Clone project inside /src folder:**
 
-   Crie um arquivo `.env` na raiz do projeto para definir variáveis de ambiente personalizadas.
+   Create a /src folder inside the project and clone the project inside it.
 
-3. **Construa e inicie os contêineres:**
+3. **Build and start the containers:**
 
-   Execute o comando abaixo para construir e iniciar os contêineres definidos no `docker-compose.yml`:
+   Run the following command to build and start the containers defined in `docker-compose.yml`:
 
    ```bash
    docker-compose up -d
    ```
 
-   Este comando executará os seguintes serviços:
+   This command will start the following services:
 
-   - **server (Nginx)**: Disponível nas portas `80` e `443`.
-   - **php (PHP-FPM)**: Disponível na porta `8080`.
-   - **mysql (MySQL)**: Disponível na porta `33068`.
+   - **server (Nginx)**: Available on ports`80` and `443`.
+   - **php (PHP-FPM)**: Available on ports `8080`.
+   - **mysql (MySQL)**: Available on ports `33068`.
 
-4. **Acesse a aplicação:**
+4. **Access the application:**
 
-   Abra seu navegador e acesse [http://localhost](http://localhost).
+   Open your browser and go to [http://localhost](http://localhost).
 
-## Estrutura dos Arquivos
+## File Structure
 
 ### Docker Compose (`example.docker-compose.yml`)
 
-Define três serviços:
+Defines three services::
 
-- **server (Nginx)**: Serve como servidor web, redirecionando tráfego para o contêiner PHP.
-- **php (PHP-FPM)**: Contêiner para execução de scripts PHP.
-- **mysql (MySQL)**: Banco de dados relacional.
+- **server (Nginx)**: Acts as the web server, routing traffic to the PHP container.
+- **php (PHP-FPM)**: Container for executing PHP scripts.
+- **mysql (MySQL)**: Relational database.
 
-### Configuração do Nginx (`nginx/example.nginx.conf`)
-
-Configura o Nginx para servir uma aplicação PHP e redireciona certas rotas para o contêiner PHP.
-
-### Dockerfile do Nginx (`dockerfiles/example.nginx.dockerfile`)
-
-Define a imagem Docker personalizada para o servidor Nginx. Inclui a instalação de pacotes necessários e a configuração de SSL.
-
-### Dockerfile do PHP (`dockerfiles/example.php.dockerfile`)
-
-Define a imagem Docker personalizada para o ambiente PHP. Inclui instalação de extensões PHP, dependências e Composer.
-
-## Comandos Úteis
-
-- **Parar os contêineres:**
-
-  ```bash
-  docker-compose down
-  ```
-
-- **Reconstruir contêineres após alterações:**
-
-  ```bash
-  docker-compose up -d --build
-  ```
-
-- **Visualizar logs dos contêineres:**
-
-  ```bash
-  docker-compose logs -f
-  ```
 
 ## Notas Adicionais
 
-- Certifique-se de que os diretórios `src/` e `docker/.dbdata/` tenham as permissões corretas para que os contêineres possam acessar os arquivos.
+- Ensure that the `src/` and `docker/.dbdata/` directories have the correct permissions so that the containers can access the files.
 
-- Modifique os arquivos de configuração conforme necessário para atender aos requisitos específicos do seu projeto.
+- Modify the configuration files as needed to meet your project's specific requirements.
